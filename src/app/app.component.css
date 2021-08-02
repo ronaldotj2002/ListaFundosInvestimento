@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+
+.grid-container.header {
+    background-image: url('../assets/img/header.png');
+    background-repeat: no-repeat;
+    height:327px;
+    color: #fff;
+    padding:15vh;
+    text-align: center; }
+
+    h2 { font-family: 'Roboto Slab'}
+
+.total {
+    background: #eee;
+    padding: 15px 0; }
+
+.filtros {
+    background: #fff; 
+    font-size: 12px;
+    margin-bottom: 20px; 
+    padding: 20px; }
+
+input[type="text"] {
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc; 
+    width: 60%; }
+
+.range {
+    background: #fafafa; 
+    padding: 15px;
+    min-height: 140px;}
+
+.padding-left-15 {
+    padding-left: 50px; }
+
+.checkeds {
+    margin-left:10px;
+    width:250px; }
+
+.lupa-busca {
+    position: relative;
+    top: -7vh;
+    left: 35vw; }
+ 
+/* table tr th {
+    display: inline; 
+    background: #fff; 
+    margin-top:10px; } */
+.header-tabela {
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+.table {
+    background: #fff;
+    min-height: 50px;
+    font-size: 12px; 
+    display: inline; 
+    border: none; }
+
+.lista-tabela {
+    margin-left: 0;
+    margin-top: 20px;
+    display: block; }
+
+.col-fundo {
+    width: 150px;
+    display: block; }
+
+.titulo-estrategia {
+    padding: 20px 15px; 
+    background: #eee; 
+    width: 100%; }
+
+thead, tbody, tfoot{
+    border: none;     }
+
+tbody, tfoot, thead {
+    border: none; }
+
+table tr {
+  display: block; }
+
+.remover {
+    display: none; }
+
+.mdi-block-helper {
+    font-size: 18px;
+    color: #9c9d9e; }
+
+.mdi-information-outline {
+    font-size: 21px; }
+
+.mdi-star-circle {
+    font-size: 21px; 
+    color: #639d31; }
+
+.mdi-star-circle:hover {
+    font-size: 21px; 
+    color: #333; }
+
+.arrow {
+    width: 21px; }
+
+.check-circle {
+    width: 19px; }
+
+.legenda {
+    font-weight: 700;
+    font-size:16px;
+    color: #444; }
+
+.large-5 {
+    margin-left: 15px; }
+.large-5 p {
+    margin-left: 20px;
+    font-size: 16px; }
+
+.large-5 p span {
+    margin-left: 15px; }
+
+
+/*Accordion checkBox*/
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  input[type=radio] {
+    display: none;
+  }
+  
+  .a-container label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 12px;
+    padding-left: 10px;
+    color: #aaa;
+    background: #f4f5f7;
+    border-bottom: 1px solid #ddd;
+    
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+  }
+  
+  .a-container label:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 7px solid #aaa;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 5px solid transparent;
+    position: absolute;
+    right: 10px;
+    top: 16px;
+  }
+  
+  .a-container input:checked + label {
+    background-color: #ddd;
+    color: #222;
+  }
+  
+  .a-container input:checked + label:after {
+    border-top: 8px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #222;
+    border-left: 6px solid transparent;
+    top: 6px;
+  }
+  
+  .a-content {
+    padding: 0 ;
+    display: none;
+  }
+  
+  .a-container input:checked ~ .a-content {
+    display: block;
+  }
+
+
+
+  /*TESTE*/
+
+ 
+  .tab {
+    width: 100%;
+    overflow: hidden;
+  }
+  /* .tab-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  } */
+  .tab-label:hover {
+    background: #e6fcfc;
+  }
+  /* .tab-label::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all 0.35s;
+  } */
+  .tab-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.35s;
+  }
+  .tab-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    font-size: 0.75em;
+    background: #2c3e50;
+    cursor: pointer;
+  }
+  .tab-close:hover {
+    background: #1a252f;
+  }
+  input:checked + .tab-label {
+    background: #e6fcfc;
+  }
+  input:checked + .tab-label::after {
+    transform: rotate(90deg);
+  }
+  input:checked ~ .tab-content {
+    max-height: 100vh;
+    padding: 1em;
+  }
+
+
+
+      
+
+
+
+
