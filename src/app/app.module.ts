@@ -9,6 +9,8 @@ import { AplicacaoMinimaComponentComponent } from './aplicacao-minima-component/
 import { PrazoResgateComponentComponent } from './prazo-resgate-component/prazo-resgate-component.component';
 import { PerfilDeRiscoComponentComponent } from './perfil-de-risco-component/perfil-de-risco-component.component';
 import {NgArrayPipesModule} from 'ngx-pipes';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 
 registerLocaleData(ptBr);
@@ -17,13 +19,15 @@ registerLocaleData(ptBr);
     AppComponent,
     AplicacaoMinimaComponentComponent,
     PrazoResgateComponentComponent,
-    PerfilDeRiscoComponentComponent
+    PerfilDeRiscoComponentComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     CommonModule,
-    NgArrayPipesModule
+    NgArrayPipesModule,
+    Ng2SearchPipeModule,
+    FormsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' }

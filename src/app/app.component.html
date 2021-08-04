@@ -1,97 +1,141 @@
-<!-- HEADER --> 
+<!-- HEADER -->
 <div class="grid-container header fluid">
-  
   <h2>Lista de Fundos de Investimento</h2>
   <p>Conheça a nossa lista de fundos</p>
-
 </div>
+<!-- END HEADER -->
 
 <div class="total">
-
-
-
-  <div class="row">
-   
-    <div class="large-9 medium-9 small-12 columns">
-    
-    <div class="filtros">
-      <input type="text" name="busca" placeholder="Buscar fundo por nome" />
-      <img src="../assets/img/lupa.png" alt="Imagem lupa" class="lupa-busca"/>
-
-      <div class="large-up-3 range">
-        <div class="column">
-          <app-aplicacao-minima-component></app-aplicacao-minima-component>                  
-        </div>
-        <div class="column">
-          <app-perfil-de-risco-component></app-perfil-de-risco-component>                    
-        </div>
-        <div class="column padding-left-15">
-          <app-prazo-resgate-component></app-prazo-resgate-component>
-        </div>
-      </div>  
-      
-    </div>
-
-    
-      
-      <div class="row lista-tabela">        
   
-          <div class="column filtros listas">  
-            
-           
-            <table class="unstriped">           
-                <tr>                          
-                  <th width="300">Fundo</th>
-                  <th width="81">Data da cota</th>
-                  <th width="70">Mês (%)</th>
-                  <th width="70">2016 (%)</th>
-                  <th width="66">12M (%)</th>
-                  <th width="70">Aplicação mínima (R$)</th>
-                  <th width="70">Prazo do resgate</th>
-                  <th width="70">Aplicar</th>
-                </tr>              
-             
-                
-                <tbody *ngFor="let dados of listaDados; let i = index;">  
-                
-                    <p class="large-8 titulo-estrategia" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 " >{{ dados?.specification?.fund_macro_strategy.name }}</p>  
-                    <p class="large-8 titulo-estrategia" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Estratégias Diferenciadas' && i == 147 " >{{ dados?.specification?.fund_macro_strategy.name }}</p>
-                    <p class="large-8 titulo-estrategia" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 351 " >{{ dados?.specification?.fund_macro_strategy.name }}</p>
-                  
-                      <tr> 
-                        <div class="tabs">
-                          <div class="tab">
-                            <input type="checkbox" #checkInput hidden id="tablist">
-                            <div class="tab-label" for="tablist" (click)="checkInput.click()">
-                              <td width="300">{{ dados?.simple_name }} <br> {{ dados?.specification?.fund_type }} {{ dados?.specification?.fund_class }}</td>   
-                              <td width="81">{{ dados?.quota_date | date: 'dd/MM/yyyy'   }}</td>  
-                              <td width="70">{{ dados?.profitabilities?.month }}</td>   
-                              <td width="70">{{ dados?.profitabilities?.year }}</td>  
-                              <td width="66">{{ dados?.profitabilities?.m12 }}</td> 
-                              <td width="70">{{ dados?.operability?.minimum_initial_application_amount | currency : ' '}}</td>   
-                              <td width="70">{{ dados?.operability?.retrieval_quotation_days_str }}</td>  
-                              <td width="70">{{ dados?.operability?.retrieval_quotation_days_str}}</td> 
-                            </div>
-                            <div class="tab-content">
-                              {{ dados?.simple_name }}
-                            </div>
-                          </div>  
-                        </div>
-                        
-                      </tr>
-              
-                </tbody>
-              </table>
-            </div>          
-      
+  <div class="row">
+
+    <div class="large-9 medium-9 small-12 columns">
+
+      <div class="filtros">
+        <input type="text" name="busca" [(ngModel)]="busca" placeholder="Buscar fundo por nome" />
+        <img src="../assets/img/lupa.png" alt="Imagem lupa" class="lupa-busca" />
+
+        <div class="large-up-3 range">
+          <div class="column">
+            <app-aplicacao-minima-component (filtroAplicacaoMinima)="recebeFiltroAm($event)">
+            </app-aplicacao-minima-component>
+          </div>
+          <div class="column">
+            <app-perfil-de-risco-component (filtroPerfilRisco)="recebeFiltroPr($event)"></app-perfil-de-risco-component>
+
+          </div>
+          <div class="column padding-left-15">
+            <app-prazo-resgate-component (filtroPrazoResgate)="recebeFiltroPrazo($event)"></app-prazo-resgate-component>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="row lista-tabela">
+
+        <div class="column list-grid listas">
+
+
+          <table class="unstriped" width="100%">
+            <tr class="thead">
+              <th width="30%">Fundo</th>
+              <th width="10%">Data da cota</th>
+              <th width="10%">Mês (%)</th>
+              <th width="10&">2016 (%)</th>
+              <th width="10%">12M (%)</th>
+              <th width="10%">Aplicação mínima (R$)</th>
+              <th width="10%">Prazo do resgate</th>
+              <th width="10%">Aplicar</th>
+            </tr>
+
+
+            <tbody *ngFor="let dados of listaDados | filter:busca let i = index;">
+
+              <p class="large-8 titulo-estrategia" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 ||
+                         dados?.specification?.fund_macro_strategy?.name == 'Estratégias Diferenciadas' && i == 148 ||
+                         dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 353">
+                {{ dados?.specification?.fund_macro_strategy.name }}
+              </p>
+              <p class="large-8 titulo-estrategia" 
+                      *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 ||
+                             dados?.specification?.fund_macro_strategy?.name == 'Estratégias Diferenciadas' && i == 148 ||
+                             dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 353" >
+                             {{ dados?.specification?.fund_main_strategy.name }}
+                    </p> 
+
+              <tr>
+                <div class="tabs">
+                  <div class="tab">
+                    <input type="checkbox" #checkInput hidden id="tablist">
+                    <div class="tab-label-list" for="tablist" (click)="checkInput.click()"
+                      [ngClass]="[dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risco-1' : '', 
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 2 ? 'risco-2' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 3 ? 'risco-3' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 4 ? 'risco-4' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 5 ? 'risco-5' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 6 ? 'risco-6' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 7 ? 'risco-7' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 8 ? 'risco-8' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 9 ? 'risco-9' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 10 ? 'risco-10' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 11 ? 'risco-11' : '',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 12 ? 'risco-12' : '']">
+                      
+                      <td class="thead-responsivo">{{ dados?.simple_name }} <br> <span class="modalidade-fundo"> {{
+                          dados?.specification?.fund_type }} | {{ dados?.specification?.fund_class }} </span>
+                          <div class="risk-responsivo"
+                              [ngClass]="[dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risk-1' : '', 
+                              dados?.specification?.fund_risk_profile?.score_range_order === 2 ? 'risk-2' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 3 ? 'risk-3' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 4 ? 'risk-4' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 5 ? 'risk-5' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 6 ? 'risk-6' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 7 ? 'risk-7' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 8 ? 'risk-8' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 9 ? 'risk-9' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 10 ? 'risk-10' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 11 ? 'risk-11' : '',
+                              dados?.specification?.fund_risk_profile?.score_range_order === 12 ? 'risk-12' : '']">
+                              &nbsp;</div>
+                        </td>
+                      <td class="thead" width="10%">{{ dados?.quota_date | date: 'dd/MM/yyyy' }}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.month  }}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.year }}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.m12 }}</td>
+                      <td class="thead" width="10%">{{ dados?.operability?.minimum_initial_application_amount | currency : ' '}}</td>
+                      <td class="thead" width="10&">{{ dados?.operability?.retrieval_quotation_days_str }}</td>
+                      <td class="thead" width="10%"><img src="../assets/img/arrow.png" /></td>
+                    </div>                    
+                    <div class="tab-content">
+                      <div class="dados-accordion">
+                        <div class="row"><p><span class="tab-responsivo-content-label">Cotização da aplicação:</span> <span class="tab-responsivo-content">{{ dados?.operability?.application_quotation_days_str }}</span></p></div>
+                        <div class="row"><p><span class="tab-responsivo-content-label">Cotização do resgate:  </span> <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_quotation_days_str }}</span></p></div>
+                        <div class="row"><p><span class="tab-responsivo-content-label">Liquidação do resgate: </span> <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_liquidation_days_str }}</span></p></div>
+                        <div class="row"><p><span class="tab-responsivo-content-label">Taxa de administração: </span> <span class="tab-responsivo-content">{{ dados?.fees?.administration_fee }}</span></p></div>
+                        <div class="row"><p><a href="#"> Conheça mais informações sobre este fundo</a></p></div>
+                        <br><br>
+                        <p><span class="cnpj">CNPJ do fundo:</span> {{ dados?.cnpj }} <br><span class="cnpj">Nome do gestor:</span> {{ dados?.simple_name }}</p>                        
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
       <div class="row">
-        <div class="large-5 filtros listas"> 
+        <div class="large-5 infos listas">
           <div class="row">
             <p class="legenda">LEGENDA</p>
           </div>
-         
+
           <div class="row">
             <p>
               <i class="mdi mdi-star-circle"></i>
@@ -122,69 +166,52 @@
 
           <div class="row">
             <p>
-              <img src="../assets/img/arrow.png"  class="arrow"/>
+              <img src="../assets/img/arrow.png" class="arrow" />
               <span> Aplicar neste fundo</span>
             </p>
           </div>
         </div>
-      </div> 
+      </div>
+    </div>
+    <div class="large-3 medium-3 small-12 columns tabsuspenso">
+
+      <input type="checkbox" class="checkAll" />
+      <div class="tab">
+        <input type="checkbox" hidden #checkInputRf id="tablist">
+        <div class="tab-label" for="tablist" (click)="checkInputRf.click()">
+          <input type="radio" name="checkbox" id="a1" />
+          <span> RENDA FIXA</span>
+        </div>
+        <div class="tab-content-check" *ngFor="let check of listaCheckBoxRf; let i = index;">
+          <input type="checkbox" (input)="checked($event)" value="{{check}}" /> <span>{{ check }} </span>
+        </div>
+      </div>
+
+      <input type="checkbox" class="checkAll" />
+      <div class="tab">
+        <input type="checkbox" hidden #checkInputEd id="tablist">
+        <div class="tab-label" for="tablist" (click)="checkInputEd.click()">
+          <span>ESTRATÉGIAS DIFERENCIADAS</span>
+        </div>
+        <div class="tab-content-check" *ngFor="let check of listaCheckBoxEd; let i = index;">
+          <input type="checkbox" value="{{check}}" /><span>{{ check }} </span>
+        </div>
+      </div>
+
+      <input type="checkbox" class="checkAll" />
+      <div class="tab">
+        <input type="checkbox" hidden #checkInputRv id="tablist">
+        <div class="tab-label" for="tablist" (click)="checkInputRv.click()">
+          <span>RENDA VARIÁVEL</span>
+        </div>
+        <div class="tab-content-check" *ngFor="let check of listaCheckBoxRv; let i = index;">
+          <input type="checkbox" value="{{check}}" /><span>{{ check }} </span>
+        </div>
+      </div>
+
+
+    </div>
+
   </div>
-      <div class="large-3 checkeds medium-3 small-12 columns filtros">  
-      
-            <!-- <div class="tabs">
-              <div class="tab">
-                <input type="checkbox" id="chck1">
-                <label class="tab-label" for="chck1">RENDA FIXA</label>
-                <div class="tab-content">
-                  <div class="a-content" *ngFor="let check of listaCheckBoxRf; let i = index;">
-                    <input type="checkbox" value="{{check}}"/>{{ check }}
-                  </div>
-                </div>
-              </div>
-         
-            </div> -->
-     
-      
-          <ul class="a-container ">
-          
-          <li class="a-items">
-            <input type="radio" name="checkbox" id="a1" />
-            <label for="a1"><input type="checkbox" class="abrir" /> RENDA FIXA</label>
-            <div class="a-content" *ngFor="let check of listaCheckBoxRf; let i = index;">
-              <input type="checkbox" value="{{check}}"/>{{ check }}
-            </div>
-          </li>
-          
-            
-            <li class="a-items">
-            <input type="radio" name="checkbox" id="a2" />
-            <label for="a2"><input type="checkbox" class="abrir" />ESTRATÉGIAS DIFERENCIADAS</label>
-            <div class="a-content" *ngFor="let check of listaCheckBoxEd; let i = index;">
-              <input type="checkbox" value="{{check}}"/>{{ check }}
-              </div>
-          </li>
-          
-            
-            <li class="a-items">
-            <input type="radio" name="checkbox" id="a3" />
-            <label for="a3"><input type="checkbox" class="abrir" />Renda Variável</label>
-            <div class="a-content" *ngFor="let check of listaCheckBoxRv; let i = index;">
-              <input type="checkbox" value="{{check}}"/>{{ check }}
-            </div>
-          </li>
-        </ul>
-      </div>  
-  
+
 </div>
-   
-</div>
-
-
-
-  
-  
-
-
-
-
-

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-perfil-de-risco-component',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-de-risco-component.component.css']
 })
 export class PerfilDeRiscoComponentComponent implements OnInit {
+
+  @Output() filtroPerfilRisco = new EventEmitter<any>();
 
   tipoRisco: number = 12;
   listaRiscos = [
@@ -29,6 +31,8 @@ export class PerfilDeRiscoComponentComponent implements OnInit {
 
   filtroRiscos(risco: any) {
     this.tipoRisco = risco.target.value;
+    this.filtroPerfilRisco.emit(this.tipoRisco);   
   }
+  
 
 }

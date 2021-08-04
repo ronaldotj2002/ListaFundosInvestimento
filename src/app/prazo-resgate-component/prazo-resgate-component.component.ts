@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-prazo-resgate-component',
@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prazo-resgate-component.component.css']
 })
 export class PrazoResgateComponentComponent implements OnInit {
+  @Output() filtroPrazoResgate = new EventEmitter();
 
-  prazoDeResgate : number = 0;
+  prazoDeResgate : number = 270;
   prazoDias = [
     {'label': 0, 'value': 0},
     {'label': 1, 'value': 1}, 
@@ -70,147 +71,195 @@ export class PrazoResgateComponentComponent implements OnInit {
     switch (pResgate) {
       case '0':
         this.prazoDeResgate = this.prazoDias[0].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '1':
         this.prazoDeResgate = this.prazoDias[1].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '2':
         this.prazoDeResgate = this.prazoDias[2].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '3':
         this.prazoDeResgate = this.prazoDias[3].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '4':
         this.prazoDeResgate = this.prazoDias[4].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '5':
         this.prazoDeResgate = this.prazoDias[5].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '6':
         this.prazoDeResgate = this.prazoDias[6].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '7':
         this.prazoDeResgate = this.prazoDias[7].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '8':
         this.prazoDeResgate = this.prazoDias[8].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '9':
         this.prazoDeResgate = this.prazoDias[9].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '10':
         this.prazoDeResgate = this.prazoDias[10].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '11':
         this.prazoDeResgate = this.prazoDias[11].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '12':
         this.prazoDeResgate = this.prazoDias[12].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '13':
         this.prazoDeResgate = this.prazoDias[13].value;
+        this.filtroPrazo(this.prazoDeResgate)
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '14':
         this.prazoDeResgate = this.prazoDias[14].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '15':
         this.prazoDeResgate = this.prazoDias[15].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '16':
         this.prazoDeResgate = this.prazoDias[16].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '17':
         this.prazoDeResgate = this.prazoDias[17].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '18':
         this.prazoDeResgate = this.prazoDias[18].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '19':
         this.prazoDeResgate = this.prazoDias[19].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '20':
         this.prazoDeResgate = this.prazoDias[20].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '21':
         this.prazoDeResgate = this.prazoDias[21].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '22':
         this.prazoDeResgate = this.prazoDias[22].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '23':
         this.prazoDeResgate = this.prazoDias[23].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '24':
         this.prazoDeResgate = this.prazoDias[24].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '25':
         this.prazoDeResgate = this.prazoDias[25].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '26':
         this.prazoDeResgate = this.prazoDias[26].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '27':
         this.prazoDeResgate = this.prazoDias[27].value;
         break;
       case '28':
         this.prazoDeResgate = this.prazoDias[28].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '29':
         this.prazoDeResgate = this.prazoDias[29].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '30':
         this.prazoDeResgate = this.prazoDias[30].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '31':
         this.prazoDeResgate = this.prazoDias[31].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '32':
         this.prazoDeResgate = this.prazoDias[32].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '33':
         this.prazoDeResgate = this.prazoDias[33].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '34':
         this.prazoDeResgate = this.prazoDias[34].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '35':
         this.prazoDeResgate = this.prazoDias[35].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '36':
         this.prazoDeResgate = this.prazoDias[36].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '37':
         this.prazoDeResgate = this.prazoDias[37].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '38':
         this.prazoDeResgate = this.prazoDias[38].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '39':
         this.prazoDeResgate = this.prazoDias[39].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '40':
         this.prazoDeResgate = this.prazoDias[40].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '41':
         this.prazoDeResgate = this.prazoDias[41].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '42':
         this.prazoDeResgate = this.prazoDias[42].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '43':
         this.prazoDeResgate = this.prazoDias[43].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '44':
         this.prazoDeResgate = this.prazoDias[44].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '45':
         this.prazoDeResgate = this.prazoDias[45].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '46':
         this.prazoDeResgate = this.prazoDias[46].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       case '47':
         this.prazoDeResgate = this.prazoDias[47].value;
+        this.filtroPrazo(this.prazoDeResgate)
         break;
       
 
@@ -218,6 +267,10 @@ export class PrazoResgateComponentComponent implements OnInit {
         console.log("Esse valor não existe");
         break;
     }
+  }
+  filtroPrazo(prazo:any) {
+    // this.prazoDeResgate = prazo.target.value; 
+    this.filtroPrazoResgate.emit(this.prazoDeResgate)
   }
 
 }

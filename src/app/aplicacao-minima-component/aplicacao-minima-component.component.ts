@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-aplicacao-minima-component',
@@ -7,32 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AplicacaoMinimaComponentComponent implements OnInit {
 
-  aplicacaoMinima: number = 0;
+  
+  @Output() filtroAplicacaoMinima = new EventEmitter<any>();
+
+  aplicacaoMinima: any = 500000;
   valores = [
     {'label': 0, 'value': 0},
-    {'label': 1, 'value': 1}, 
-    {'label': 2, 'value': 100},
-    {'label': 3, 'value': 200},
-    {'label': 4, 'value': 250},
-    {'label': 5, 'value': 500},
-    {'label': 6, 'value': 1000},
-    {'label': 7, 'value': 2000},
-    {'label': 8, 'value': 2500},
-    {'label': 9, 'value': 3000},
-    {'label': 10, 'value': 5000},
-    {'label': 11, 'value': 10000},
-    {'label': 12, 'value': 15000},
-    {'label': 13, 'value': 20000},
-    {'label': 14, 'value': 25000},
-    {'label': 15, 'value': 30000},
-    {'label': 16, 'value': 50000},
-    {'label': 17, 'value': 100000},
-    {'label': 18, 'value': 500000},    
+    {'label': 1, 'value': 1.00}, 
+    {'label': 2, 'value': 100.00},
+    {'label': 3, 'value': 200.00},
+    {'label': 4, 'value': 250.00},
+    {'label': 5, 'value': 500.00},
+    {'label': 6, 'value': 1000.00},
+    {'label': 7, 'value': 2000.00},
+    {'label': 8, 'value': 2500.00},
+    {'label': 9, 'value': 3000.00},
+    {'label': 10, 'value': 5000.00},
+    {'label': 11, 'value': 10000.00},
+    {'label': 12, 'value': 15000.00},
+    {'label': 13, 'value': 20000.00},
+    {'label': 14, 'value': 25000.00},
+    {'label': 15, 'value': 30000.00},
+    {'label': 16, 'value': 50000.00},
+    {'label': 17, 'value': 100000.00},
+    {'label': 18, 'value': 500000.00},    
   ];
   
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   valorAplicacao(valor:any) {      
@@ -99,7 +103,9 @@ export class AplicacaoMinimaComponentComponent implements OnInit {
         console.log("Esse valor não existe");
         break;
     }
-          
+    this.filtroAplicacaoMinima.emit(this.aplicacaoMinima)
+     
   }
+
 
 }
