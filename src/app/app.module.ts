@@ -11,6 +11,7 @@ import { PerfilDeRiscoComponentComponent } from './perfil-de-risco-component/per
 import {NgArrayPipesModule} from 'ngx-pipes';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 
 registerLocaleData(ptBr);
@@ -28,6 +29,7 @@ registerLocaleData(ptBr);
     NgArrayPipesModule,
     Ng2SearchPipeModule,
     FormsModule,
+    NgxTippyModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' }

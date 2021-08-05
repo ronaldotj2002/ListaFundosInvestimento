@@ -6,12 +6,12 @@
 <!-- END HEADER -->
 
 <div class="total">
-  
+
   <div class="row">
 
     <div class="large-9 medium-9 small-12 columns">
 
-      <div class="filtros">
+      <div class="filtros borda-box">
         <input type="text" name="busca" [(ngModel)]="busca" placeholder="Buscar fundo por nome" />
         <img src="../assets/img/lupa.png" alt="Imagem lupa" class="lupa-busca" />
 
@@ -30,8 +30,6 @@
         </div>
 
       </div>
-
-
 
       <div class="row lista-tabela">
 
@@ -57,20 +55,25 @@
                          dados?.specification?.fund_macro_strategy?.name == 'Estratégias Diferenciadas' && i == 148 ||
                          dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 353">
                 {{ dados?.specification?.fund_macro_strategy.name }}
+                <i class="mdi mdi-help-circle" ngxTippy [tippyProps]="{placement: 'bottom' }"  attr.data-tippy-content="{{dados?.specification?.fund_macro_strategy?.explanation}}">
+                </i>
               </p>
-              <p class="large-8 titulo-estrategia" 
-                      *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 ||
+              <p class="large-8 tipo-fundo" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 ||
                              dados?.specification?.fund_macro_strategy?.name == 'Estratégias Diferenciadas' && i == 148 ||
-                             dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 353" >
-                             {{ dados?.specification?.fund_main_strategy.name }}
-                    </p> 
+                             dados?.specification?.fund_macro_strategy?.name == 'Renda Variável' && i == 353">
+                {{ dados?.specification?.fund_main_strategy.name }}
+                <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom' }" ngxTippy
+                  attr.data-tippy-content="{{dados?.specification?.fund_macro_strategy?.explanation}}">
+                </i>
+              </p>
 
               <tr>
-                <div class="tabs">
+                <div class="tabs borda-box">
                   <div class="tab">
                     <input type="checkbox" #checkInput hidden id="tablist">
                     <div class="tab-label-list" for="tablist" (click)="checkInput.click()"
-                      [ngClass]="[dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risco-1' : '', 
+                      [ngClass]="[dados?.is_closed_to_capture == true ? 'color-capture-false' :'',
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risco-1' : '', 
                                   dados?.specification?.fund_risk_profile?.score_range_order === 2 ? 'risco-2' : '',
                                   dados?.specification?.fund_risk_profile?.score_range_order === 3 ? 'risco-3' : '',
                                   dados?.specification?.fund_risk_profile?.score_range_order === 4 ? 'risco-4' : '',
@@ -81,12 +84,19 @@
                                   dados?.specification?.fund_risk_profile?.score_range_order === 9 ? 'risco-9' : '',
                                   dados?.specification?.fund_risk_profile?.score_range_order === 10 ? 'risco-10' : '',
                                   dados?.specification?.fund_risk_profile?.score_range_order === 11 ? 'risco-11' : '',
-                                  dados?.specification?.fund_risk_profile?.score_range_order === 12 ? 'risco-12' : '']">
-                      
-                      <td class="thead-responsivo">{{ dados?.simple_name }} <br> <span class="modalidade-fundo"> {{
-                          dados?.specification?.fund_type }} | {{ dados?.specification?.fund_class }} </span>
-                          <div class="risk-responsivo"
-                              [ngClass]="[dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risk-1' : '', 
+                                  dados?.specification?.fund_risk_profile?.score_range_order === 12 ? 'risco-12' : '',]">
+
+                      <td class="thead-responsivo"
+                        [ngClass]="[dados?.is_closed_to_capture == true ? 'color-capture-false' :'']">
+                        {{ dados?.simple_name }} <i class="mdi mdi-star-circle" *ngIf="dados?.specification?.is_qualified == true" 
+                                                    [tippyProps]="{placement: 'top'}" ngxTippy
+                                                    data-tippy-content="Fundo para investidor qualificado">
+                                                  </i> <br>
+                        <span class="modalidade-fundo"
+                          [ngClass]="[dados?.is_closed_to_capture == true ? 'color-capture-false' :'']">
+                          {{ dados?.specification?.fund_type }} | {{ dados?.specification?.fund_class }}
+                        </span>
+                        <div class="risk-responsivo" [ngClass]="[dados?.specification?.fund_risk_profile?.score_range_order === 1 ? 'risk-1' : '', 
                               dados?.specification?.fund_risk_profile?.score_range_order === 2 ? 'risk-2' : '',
                               dados?.specification?.fund_risk_profile?.score_range_order === 3 ? 'risk-3' : '',
                               dados?.specification?.fund_risk_profile?.score_range_order === 4 ? 'risk-4' : '',
@@ -98,40 +108,96 @@
                               dados?.specification?.fund_risk_profile?.score_range_order === 10 ? 'risk-10' : '',
                               dados?.specification?.fund_risk_profile?.score_range_order === 11 ? 'risk-11' : '',
                               dados?.specification?.fund_risk_profile?.score_range_order === 12 ? 'risk-12' : '']">
-                              &nbsp;</div>
-                        </td>
+                          &nbsp;</div>
+                      </td>
                       <td class="thead" width="10%">{{ dados?.quota_date | date: 'dd/MM/yyyy' }}</td>
-                      <td class="thead" width="10%">{{ dados?.profitabilities?.month  }}</td>
-                      <td class="thead" width="10%">{{ dados?.profitabilities?.year }}</td>
-                      <td class="thead" width="10%">{{ dados?.profitabilities?.m12 }}</td>
-                      <td class="thead" width="10%">{{ dados?.operability?.minimum_initial_application_amount | currency : ' '}}</td>
-                      <td class="thead" width="10&">{{ dados?.operability?.retrieval_quotation_days_str }}</td>
-                      <td class="thead" width="10%"><img src="../assets/img/arrow.png" /></td>
-                    </div>                    
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.month | percent:'1.2-2'}}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.year | percent:'1.2-2' }}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.m12 | percent:'1.2-2': '' }}</td>
+                      <td class="thead" width="10%">{{ dados?.operability?.minimum_initial_application_amount | currency
+                        : ' '}}</td>
+
+                      <td class="thead" width="10&" *ngIf="dados?.operability?.retrieval_quotation_days_str.length < 6">
+                        {{ dados?.operability?.retrieval_quotation_days_str }}</td>
+                      <td class="thead" width="10&" *ngIf="dados?.operability?.retrieval_quotation_days_str.length > 5">
+                        <i class="mdi mdi-information-outline" [tippyProps]="{placement: 'bottom'}" ngxTippy
+                          attr.data-tippy-content="{{dados?.operability?.retrieval_quotation_days_str}}"></i>
+                      </td>
+                      <td class="thead" width="10%">
+                        <img *ngIf="dados?.is_closed_to_capture === false" src="../assets/img/arrow.png" />
+                        <i *ngIf="dados?.is_closed_to_capture === true" class="mdi mdi-block-helper capture-false"></i>
+                      </td>
+                    </div>
                     <div class="tab-content">
                       <div class="dados-accordion">
-                        <div class="row"><p><span class="tab-responsivo-content-label">Cotização da aplicação:</span> <span class="tab-responsivo-content">{{ dados?.operability?.application_quotation_days_str }}</span></p></div>
-                        <div class="row"><p><span class="tab-responsivo-content-label">Cotização do resgate:  </span> <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_quotation_days_str }}</span></p></div>
-                        <div class="row"><p><span class="tab-responsivo-content-label">Liquidação do resgate: </span> <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_liquidation_days_str }}</span></p></div>
-                        <div class="row"><p><span class="tab-responsivo-content-label">Taxa de administração: </span> <span class="tab-responsivo-content">{{ dados?.fees?.administration_fee }}</span></p></div>
-                        <div class="row"><p><a href="#"> Conheça mais informações sobre este fundo</a></p></div>
-                        <br><br>
-                        <p><span class="cnpj">CNPJ do fundo:</span> {{ dados?.cnpj }} <br><span class="cnpj">Nome do gestor:</span> {{ dados?.simple_name }}</p>                        
+                        <div class="row">
+
+                          <p>
+                            <span class="tab-responsivo-content-label">Cotização da aplicação:</span>
+                            <span class="tab-responsivo-content">{{ dados?.operability?.application_quotation_days_str
+                              }}
+                              <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom'}" ngxTippy
+                                data-tippy-content="Total de dias para para que o valor aplicado seja convertido em cotas do fundo.">
+                              </i>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="row">
+                          <p>
+                            <span class="tab-responsivo-content-label">Cotização do resgate: </span>
+                            <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_quotation_days_str }}
+                              (Dias corridos)
+                              <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom' }" ngxTippy
+                                data-tippy-content="Total de dias para que as cotas do fundo sejam transformadas em valor monetário.">
+                              </i>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="row">
+                          <p>
+                            <span class="tab-responsivo-content-label">Liquidação do resgate: </span>
+                            <span class="tab-responsivo-content">{{ dados?.operability?.retrieval_liquidation_days_str
+                              }}
+                              <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom' }" ngxTippy
+                                data-tippy-content="Total de dias após a conversão para que o valor do resgate esteja disponível em sua Subconta Órama.">
+                              </i>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="row">
+                          <p>
+                            <span class="tab-responsivo-content-label">Taxa de administração: </span>
+                            <span class="tab-responsivo-content">{{ dados?.fees?.administration_fee }}
+                              <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom' }" ngxTippy
+                                data-tippy-content="Taxa anual cobrada pelo Administrator do Fundo como remuneração pelos serviços prestados.">
+                              </i>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="row info-fundo">
+                          <p>
+                            <br>
+                            <a href="#"> Conheça mais informações sobre este fundo</a>
+                            <br><br>
+                            <span class="cnpj">CNPJ do fundo:</span> {{ dados?.cnpj }}
+                        </div>
                       </div>
-                    </div>                    
+                    </div>
                   </div>
                 </div>
 
               </tr>
-
+              <div class="row" *ngIf="dados.length <= 0">
+                <p>Nenhum resultado encontrado</p>
+              </div>
             </tbody>
           </table>
         </div>
 
       </div>
 
-      <div class="row">
-        <div class="large-5 infos listas">
+      <div class="row total-legenda">
+        <div class="large-5 infos listas borda-box">
           <div class="row">
             <p class="legenda">LEGENDA</p>
           </div>
@@ -176,39 +242,42 @@
     <div class="large-3 medium-3 small-12 columns tabsuspenso">
 
       <input type="checkbox" class="checkAll" />
-      <div class="tab">
+
+      <div class="tab borda-box">
         <input type="checkbox" hidden #checkInputRf id="tablist">
         <div class="tab-label" for="tablist" (click)="checkInputRf.click()">
           <input type="radio" name="checkbox" id="a1" />
           <span> RENDA FIXA</span>
         </div>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxRf; let i = index;">
-          <input type="checkbox" (input)="checked($event)" value="{{check}}" /> <span>{{ check }} </span>
+          <input type="checkbox" (input)="checked($event)" value="{{check}}" />
+          <span>{{ check }} </span>
         </div>
       </div>
 
       <input type="checkbox" class="checkAll" />
-      <div class="tab">
+      <div class="tab borda-box">
         <input type="checkbox" hidden #checkInputEd id="tablist">
         <div class="tab-label" for="tablist" (click)="checkInputEd.click()">
           <span>ESTRATÉGIAS DIFERENCIADAS</span>
         </div>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxEd; let i = index;">
-          <input type="checkbox" value="{{check}}" /><span>{{ check }} </span>
+          <input type="checkbox" value="{{check}}" />
+          <span>{{ check }} </span>
         </div>
       </div>
 
       <input type="checkbox" class="checkAll" />
-      <div class="tab">
+      <div class="tab borda-box">
         <input type="checkbox" hidden #checkInputRv id="tablist">
         <div class="tab-label" for="tablist" (click)="checkInputRv.click()">
           <span>RENDA VARIÁVEL</span>
         </div>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxRv; let i = index;">
-          <input type="checkbox" value="{{check}}" /><span>{{ check }} </span>
+          <input type="checkbox" value="{{check}}" />
+          <span>{{ check }} </span>
         </div>
       </div>
-
 
     </div>
 
