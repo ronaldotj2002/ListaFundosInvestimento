@@ -30,7 +30,15 @@ export class AppComponent {
   fundosRv: any = [];
   fundosEd: any = [];
   selectCheckBox:any = []; 
-  
+  allRendaFixa: boolean = true;
+  allEstrategiaDif: boolean = true;
+  allRendaVariavel: boolean = true;
+  valueRendaFixa: string = '';
+  valueEstrategiaDif: string = '';
+  valueRendaVariavel: string = '';
+  acumuladorRendaFixa: any = [];
+  acumuladorEstrategia: any = [];
+  acumuladorRendaVariavel: any = [];  
 
   ngOnInit() {
     this.listarDados(this.listar, '');        
@@ -62,17 +70,130 @@ export class AppComponent {
           this.listaDados = this.listaDados.filter((valor:any) => valor.operability.retrieval_quotation_days <= filtro)
         }
 
-        //FILTRO CHECKBOX
-       if(filtro && tipoFiltro === 'checkboxRendaFixa') {
-        //  this.selectRendaFixa
-         console.log("checkboxRendaFixa", filtro);
-       }
-        
+        // ACUMULADORES
+        this.acumuladorRendaFixa      = this.listaDados.filter((valor:any) => valor.specification.fund_macro_strategy.name == 'Renda Fixa')   
+        this.acumuladorRendaVariavel  = this.listaDados.filter((valor:any) => valor.specification.fund_macro_strategy.name == 'Renda Variável')
+        this.acumuladorEstrategia     = this.listaDados.filter((valor:any) => valor.specification.fund_macro_strategy.name == 'Estratégias Diferenciadas')
+
+        //RENDA FIXA - REGRA CHECKBOX ALL
+        if(tipoFiltro == 'rendaFixa' && this.allRendaFixa === true) {   
+                    
+            if(this.allRendaFixa === true && this.allEstrategiaDif === false && this.allRendaVariavel === false ) {
+
+              this.listaDados = this.acumuladorRendaFixa;
+              } 
+              if(this.allRendaFixa === true && this.allEstrategiaDif === true && this.allRendaVariavel === false) {
+                
+                this.listaDados = [...this.acumuladorRendaFixa, ...this.acumuladorEstrategia,]  
+                } 
+                if(this.allRendaFixa === true && this.allEstrategiaDif === false && this.allRendaVariavel === true){
+
+                  this.listaDados = [...this.acumuladorRendaFixa, ...this.acumuladorRendaVariavel]  
+                }
+                if(this.allRendaFixa === true && this.allEstrategiaDif === true && this.allRendaVariavel === true) {
+
+                  this.listaDados = [...this.acumuladorRendaFixa, ...this.acumuladorEstrategia, ...this.acumuladorRendaVariavel]
+                }
+         
+        } 
+        else if(tipoFiltro == 'rendaFixa' && this.allRendaFixa === false) {
+            
+          if(this.allRendaFixa === false && this.allEstrategiaDif === true && this.allRendaVariavel === true ) {
+
+              this.listaDados = [...this.acumuladorEstrategia, ...this.acumuladorRendaVariavel,] 
+              }
+              if(this.allRendaFixa === false && this.allEstrategiaDif === true && this.allRendaVariavel === false) {
+
+                this.listaDados = this.acumuladorEstrategia
+              }
+              if(this.allRendaFixa === false && this.allEstrategiaDif === false && this.allRendaVariavel === true)
+              
+              this.listaDados = this.acumuladorRendaVariavel 
+            }
+
+            // END RENDA FIXA
+
+        //ESTRATÉGIA DIFERENCIADA - REGRA CHECKBOX ALL    
+        if(tipoFiltro == 'estrategiaDiferenciada' && this.allEstrategiaDif === true) {   
+          
+          if(this.allEstrategiaDif === true && this.allRendaFixa === false && this.allRendaVariavel === false ) {
+
+            this.listaDados = this.acumuladorRendaVariavel;
+            } 
+            if(this.allEstrategiaDif === true && this.allRendaFixa === true && this.allRendaVariavel === false) {
+              
+              this.listaDados = [...this.acumuladorEstrategia, ...this.acumuladorRendaFixa]  
+              } 
+              if(this.allEstrategiaDif === true && this.allRendaFixa === false && this.allRendaVariavel === true) {
+
+                this.listaDados = [...this.acumuladorEstrategia, ...this.acumuladorRendaVariavel]  
+              }
+              if(this.allEstrategiaDif === true && this.allRendaFixa === true && this.allRendaVariavel === true) {
+
+                this.listaDados = [...this.acumuladorEstrategia, ...this.acumuladorRendaFixa, ...this.acumuladorRendaVariavel]
+              } 
+                     
+        } else if(tipoFiltro == 'estrategiaDiferenciada' && this.allEstrategiaDif === false) {
+          
+          if(this.allRendaFixa === true && this.allEstrategiaDif === false && this.allRendaVariavel === true ) {
+
+            this.listaDados = [...this.acumuladorRendaFixa, ...this.acumuladorRendaVariavel,] 
+            }
+            if(this.allRendaFixa === false && this.allEstrategiaDif === false && this.allRendaVariavel === true) {
+
+              this.listaDados = this.acumuladorRendaVariavel
+            }
+            if(this.allRendaFixa === true && this.allEstrategiaDif === false && this.allRendaVariavel === false)
+            
+            this.listaDados = this.acumuladorRendaFixa 
+        }
+
+        //END ESTRATÉGIA DIFERENCIADA 
+
+
+        //RENDA VARIÁVEL - REGRA CHECKBOX ALL
+        if(tipoFiltro == 'rendaVariavel' && this.allRendaVariavel === true) {   
+          
+          if(this.allRendaVariavel === true && this.allRendaFixa === false && this.allEstrategiaDif === false ) {
+
+            this.listaDados = this.acumuladorRendaVariavel;
+            } 
+            if(this.allRendaVariavel === true && this.allRendaFixa === true && this.allEstrategiaDif === false) {
+              
+              this.listaDados = [...this.acumuladorRendaVariavel, ...this.acumuladorRendaFixa]  
+              } 
+              if(this.allRendaVariavel === true && this.allRendaFixa === false && this.allEstrategiaDif === true) {
+
+                this.listaDados = [...this.acumuladorRendaVariavel, ...this.acumuladorEstrategia]  
+              }
+              if(this.allRendaVariavel === true && this.allRendaFixa === true && this.allEstrategiaDif === true) {
+
+                this.listaDados = [...this.acumuladorRendaVariavel, ...this.acumuladorRendaFixa, ...this.acumuladorEstrategia]
+              } 
+       
+        } 
+        else if(tipoFiltro == 'rendaVariavel' && this.allRendaVariavel === false) {
+          
+          if(this.allRendaVariavel === false && this.allEstrategiaDif === false && this.allRendaFixa === true ) {
+
+            this.listaDados = this.acumuladorRendaFixa
+            }
+            if(this.allRendaVariavel === false && this.allEstrategiaDif === true && this.allRendaFixa === true) {
+
+              this.listaDados = [...this.acumuladorEstrategia, ...this.acumuladorRendaFixa]
+            }
+            if(this.allRendaVariavel === false && this.allEstrategiaDif === true && this.allRendaFixa=== false)
+            
+            this.listaDados = this.acumuladorEstrategia 
+        }
+        //END RENDA VARIÁVEL 
+       
+
         //CHECKBOX 
         this.checkRendaFixa = this.listaDados.map((strategy: any) => {       
           return {"fundo": strategy.specification.fund_macro_strategy.name,  "estrategia": strategy.specification.fund_main_strategy.name }      
         }) 
-       
+       console.log("checkboxRendaFixa", this.checkRendaFixa);
         //LABEL CHECKBOX 
         this.filtroRendaFixaDuplicada = this.checkRendaFixa.forEach((str:any) => {
           if(str.fundo == "Renda Fixa") {
@@ -116,10 +237,32 @@ export class AppComponent {
       this.listarDados(e, 'PrazoResgate')
     }
     
-    checked(e:any){
+    checkedSelecionado(e:any){
+        
         this.filtroCheckBox = e.target.value
         this.selectCheckBox.push(this.filtroCheckBox)
-        this.listarDados(this.selectCheckBox, 'checkboxRendaFixa');
+
+        
+        console.log("e.checked",e.target.checked)
+
+
+
+
+        this.valueRendaFixa = e.target.value;
+        this.valueEstrategiaDif = e.target.value;
+        this.valueRendaVariavel = e.target.value;
+        
+        if(this.valueRendaFixa === 'rendaFixa') {
+          this.listarDados(this.allRendaFixa, e.target.value)
+        }
+
+        if(this.valueEstrategiaDif === 'estrategiaDiferenciada') {
+          this.listarDados(this.allEstrategiaDif, e.target.value)
+        }
+
+        if(this.valueRendaVariavel == 'rendaVariavel') {
+          this.listarDados(this.allRendaVariavel, e.target.value)
+        }
         
       }   
 

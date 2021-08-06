@@ -224,6 +224,7 @@ input[type="radio"] {
   padding: 1em;
   background: #f4f5f7;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .tab-label-list {
@@ -241,7 +242,6 @@ input[type="radio"] {
 .tab-label::after {
   content: "\276F";
   width: 1em;
-  height: 1em;
   text-align: center;
   transition: all 0.35s;
 }
@@ -299,6 +299,67 @@ input:checked ~ .tab-content-check {
   padding: 1em;
 }
 
+
+.container-label{
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  font-size: 12px;
+  color: #424242;
+  font-weight: 400;
+
+}
+
+.container-label input{
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+
+}
+
+.checkmark{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+.container-label input:checked ~ .checkmark{
+  background-color: #119c9f;
+  border: none;
+}
+
+.checkmark::after{
+  display: none;
+  content: '';
+  position: absolute;
+}
+
+.container-label .checkmark::after{
+  content: '';
+ left: 4px;
+ top: 0px;
+ width: 5px;
+ height: 9px;
+ transform: rotate(45deg);
+ border-right: 1px solid #fff;
+ border-bottom: 1px solid #fff;
+
+}
+
+.container-label input:checked ~ .checkmark::after{
+  display: block;
+}
+
+.checked {
+  color: #119c9f !important;
+  display: block;
+}
+
 .large-3.checkeds.medium-3.small-12.columns.filtros {
   padding: 0;
 }
@@ -309,7 +370,7 @@ input:checked ~ .tab-content-check {
 
 .checkAll {
   position: relative;
-  top: 50px;
+  top: 45px;
   left: 10px;
 }
 
