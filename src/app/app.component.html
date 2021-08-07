@@ -48,6 +48,12 @@
               <th width="10%">Aplicar</th>
             </tr>
 
+            <tbody *ngIf="listaDados?.length == 0"> 
+              <div class="row tabela-vazia">
+                <p>O fundo buscado não está disponível nesta lista. Verifique nas demais abas.</p>
+              </div>
+            </tbody>
+
 
             <tbody *ngFor="let dados of listaDados | filter:busca let i = index;">
 
@@ -185,11 +191,8 @@
                     </div>
                   </div>
                 </div>
-
+                
               </tr>
-              <div class="row" *ngIf="dados.length <= 0">
-                <p>Nenhum resultado encontrado</p>
-              </div>
             </tbody>
           </table>
         </div>
@@ -249,17 +252,16 @@
           <input type="radio" name="checkbox" id="a1" />
           <span> RENDA FIXA</span>
         </div>
-        <label class="container-label">
-          One
-          <input type="checkbox" checked="checked">
-    
-          <span class="checkmark"></span>
-    
-        </label>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxRf; let i = index;">
-          <input type="checkbox" (change)="checkedSelecionado($event)" value="{{check}}" checked/>
-          <span>{{ check }} </span>
+          <div class="row border-check">
+            <div class="margem-check">
+              <input type="checkbox" (change)="checkBoxIndividual($event)" value="{{check}}" [checked]="checkedRendaFixa"/>
+              <span>{{ check }} </span>
+            </div>
+          </div>
+          
         </div>
+       
       </div>
 
       <input type="checkbox" class="checkAll" (change)="checkedSelecionado($event)" [(ngModel)]="allEstrategiaDif" value="estrategiaDiferenciada" />
@@ -269,8 +271,12 @@
           <span>ESTRATÉGIAS DIFERENCIADAS</span>
         </div>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxEd; let i = index;">
-          <input type="checkbox" value="{{check}}" [checked]="allEstrategiaDif === true ? true : ''"/>
-          <span>{{ check }} </span>
+          <div class="row border-check">
+            <div class="margem-check">
+              <input type="checkbox" (change)= "checkBoxIndividual($event)" value="{{check}}" [checked]="checkedEstrategia"/>
+              <span>{{ check }} </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -281,8 +287,12 @@
           <span>RENDA VARIÁVEL</span>
         </div>
         <div class="tab-content-check" *ngFor="let check of listaCheckBoxRv; let i = index;">
-          <input type="checkbox" value="{{check}}" [checked]="allRendaVariavel === true ? true : ''"/>
-          <span>{{ check }} </span>
+          <div class="row border-check">
+            <div class="margem-check">
+              <input type="checkbox" (change)= "checkBoxIndividual($event)" value="{{check}}" [checked]="allRendaVariavel === true ? true : ''"/>
+              <span>{{ check }} </span>
+            </div> 
+          </div>
         </div>
       </div>
 

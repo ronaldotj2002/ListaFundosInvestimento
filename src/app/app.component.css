@@ -132,6 +132,13 @@ table tr {
   width: 30%;
 }
 
+.tabela-vazia {
+  color: #505152;
+  font-size:15px;
+  margin: 10vh 0;
+  text-align: center;
+}
+
 .remover {
   display: none;
 }
@@ -296,68 +303,74 @@ input:checked ~ .tab-content {
 }
 input:checked ~ .tab-content-check {
   max-height: 100vh;
-  padding: 1em;
+  /* padding: 0 !important; */
 }
 
-
-.container-label{
-  display: block;
-  position: relative;
-  padding-left: 20px;
+.border-check {
+  border-top: 1px solid #eff0f2;
+  width:100vw;
+  /* padding: 0 !important; */
   font-size: 12px;
-  color: #424242;
-  font-weight: 400;
-
+}
+.margem-check {
+  margin-left: 9px;
+  padding-top: 9px;
 }
 
-.container-label input{
-  position: absolute;
-  opacity: 0;
-  height: 0;
-  width: 0;
-
-}
-
-.checkmark{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 15px;
-  width: 15px;
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 2px;
-}
-.container-label input:checked ~ .checkmark{
-  background-color: #119c9f;
-  border: none;
-}
-
-.checkmark::after{
-  display: none;
-  content: '';
-  position: absolute;
-}
-
-.container-label .checkmark::after{
-  content: '';
- left: 4px;
- top: 0px;
- width: 5px;
- height: 9px;
- transform: rotate(45deg);
- border-right: 1px solid #fff;
- border-bottom: 1px solid #fff;
-
-}
-
-.container-label input:checked ~ .checkmark::after{
-  display: block;
+.margem-check span {
+  width: 100%;
 }
 
 .checked {
   color: #119c9f !important;
   display: block;
+}
+
+input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+  border: 1px solid #ccc;
+  background-color: #f4f5f7;
+}
+
+input[type=checkbox]:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+  border:none;
+  background-color:#00adc2;
+}
+
+input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: 1px solid #fff;
+  border-width: 0 1px 1px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+  left: 5px;
+}
+span{
+  margin: 0px 15px;
 }
 
 .large-3.checkeds.medium-3.small-12.columns.filtros {
@@ -410,6 +423,8 @@ input:checked ~ .tab-content-check {
   color: #777;
   font-size: 11px;
   font-weight: 500;
+  float: left;
+  margin-left: -1px;
 }
 
 /* ---------------------- FILTROS RISK*/
