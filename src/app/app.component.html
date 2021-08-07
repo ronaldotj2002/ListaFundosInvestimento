@@ -54,7 +54,7 @@
               </div>
             </tbody>
 
-
+            
             <tbody *ngFor="let dados of listaDados | filter:busca let i = index;">
 
               <p class="large-8 titulo-estrategia" *ngIf="dados?.specification?.fund_macro_strategy?.name == 'Renda Fixa' && i == 0 ||
@@ -117,7 +117,7 @@
                           &nbsp;</div>
                       </td>
                       <td class="thead" width="10%">{{ dados?.quota_date | date: 'dd/MM/yyyy' }}</td>
-                      <td class="thead" width="10%">{{ dados?.profitabilities?.month | percent:'1.2-2'}}</td>
+                      <td class="thead" width="10%">{{ dados?.profitabilities?.month | percent:'1.2-2' }}</td>
                       <td class="thead" width="10%">{{ dados?.profitabilities?.year | percent:'1.2-2' }}</td>
                       <td class="thead" width="10%">{{ dados?.profitabilities?.m12 | percent:'1.2-2': '' }}</td>
                       <td class="thead" width="10%">{{ dados?.operability?.minimum_initial_application_amount | currency
@@ -140,13 +140,12 @@
 
                           <p>
                             <span class="tab-responsivo-content-label">Cotização da aplicação:</span>
-                            <span class="tab-responsivo-content">{{ dados?.operability?.application_quotation_days_str
-                              }}
+                            <span class="tab-responsivo-content">{{ dados?.operability?.application_quotation_days_str}}
                               <i class="mdi mdi-help-circle" [tippyProps]="{placement: 'bottom'}" ngxTippy
                                 data-tippy-content="Total de dias para para que o valor aplicado seja convertido em cotas do fundo.">
                               </i>
                             </span>
-                          </p>
+                          </p>                          
                         </div>
                         <div class="row">
                           <p>

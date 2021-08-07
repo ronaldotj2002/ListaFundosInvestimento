@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxTippyModule } from 'ngx-tippy-wrapper';
 
 
+
 registerLocaleData(ptBr);
 @NgModule({
   declarations: [

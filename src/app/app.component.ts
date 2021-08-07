@@ -1,6 +1,7 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component } from '@angular/core';
 import { AppComponentService } from './app.component.service';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -50,19 +51,19 @@ export class AppComponent {
     this.listarDados(this.listar, '');        
   }
 
+ 
+
   constructor (private appService: AppComponentService ) {}
   
   listarDados(filtro:any, tipoFiltro:string ) {
-   
+    
     this.appService.getDados().subscribe(
       (res) => {
-        this.listaDados = res;    
-
+        this.listaDados = res;  
+     
         //FILTRO APLICAÇÃO MÍNIMA
         if(filtro && tipoFiltro === 'AplicacaoMinima') {
-          
-          this.listaDados = this.listaDados.filter((valor:any) => valor.operability.minimum_initial_application_amount <= filtro);
-          
+          this.listaDados = this.listaDados.filter((valor:any) => valor.operability.minimum_initial_application_amount <= filtro);                 
         }
 
         //FILTRO PERFIL RISCO
@@ -231,12 +232,12 @@ export class AppComponent {
         });
 
         //REMOVENDO REPETIDAS
-        this.listaCheckBoxRf = [...new Set (this.filtroRfixa)];
-        this.listaCheckBoxEd = [...new Set (this.filtroEdif)];
-        this.listaCheckBoxRv = [...new Set (this.filtroRvariavel)];
-        const rendaFixa      = [...new Set (this.fundosRf)];
+        this.listaCheckBoxRf = [... new Set (this.filtroRfixa)];
+        this.listaCheckBoxEd = [... new Set (this.filtroEdif)];
+        this.listaCheckBoxRv = [... new Set (this.filtroRvariavel)];
+        const rendaFixa      = [... new Set (this.fundosRf)];
         const rendaVariavel  = [... new Set (this.fundosRv)];
-        const estrategiaDife = [... new Set (this.fundosEd)];
+        const estrategiaDife = [... new Set (this.fundosEd)];        
         this.tipoFundo       = [...rendaFixa, ...rendaVariavel, ...estrategiaDife];
       },(err) => console.error("Erro ao conectar o serviço", err));    
   }

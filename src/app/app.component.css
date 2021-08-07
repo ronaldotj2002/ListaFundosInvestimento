@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
 
+.tippy-tooltip {
+  background-color: #00adc2 !important;
+}
+
 .grid-container.header {
   background-image: url("../assets/img/header.png");
   background-repeat: no-repeat;
@@ -23,7 +27,6 @@ h2 {
   margin-bottom: 20px;
   background: #fff;
   padding: 20px;
-  /* width: 95%; */
   margin-left: 15px;
 }
 
