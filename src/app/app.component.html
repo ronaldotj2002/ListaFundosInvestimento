@@ -129,9 +129,16 @@
                         <i class="mdi mdi-information-outline" [tippyProps]="{placement: 'bottom'}" ngxTippy
                           attr.data-tippy-content="{{dados?.operability?.retrieval_quotation_days_str}}"></i>
                       </td>
-                      <td class="thead" width="10%">
-                        <img *ngIf="dados?.is_closed_to_capture === false" src="../assets/img/arrow.png" />
-                        <i *ngIf="dados?.is_closed_to_capture === true" class="mdi mdi-block-helper capture-false"></i>
+                      <td class="thead" width="10%">                      
+                       
+                          <img *ngIf="dados?.is_closed_to_capture === false" src="../assets/img/arrow.png" />                         
+                      
+                            <i *ngIf="dados?.is_closed_to_capture === true" 
+                               class="mdi mdi-block-helper capture-false"
+                               [tippyProps]="{placement: 'top'}" ngxTippy
+                               data-tippy-content="Fundo fechado para aplicação">
+                            </i>
+                      
                       </td>
                     </div>
                     <div class="tab-content">
@@ -294,9 +301,6 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
-
 </div>
