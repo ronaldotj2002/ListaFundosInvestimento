@@ -1,4 +1,5 @@
-![Screenshot](https://ibb.co/48bm2rK)
+![Screenshot](https://i.ibb.co/zX3nFvQ/print-tela.png)
+![Alurakut Logo](https://i.ibb.co/g9MxDK8/alurakut-logo.png)
 
 ## Versões
 
