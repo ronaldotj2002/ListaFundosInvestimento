@@ -1,11 +1,10 @@
 ![Screenshot](https://i.ibb.co/zX3nFvQ/print-tela.png)
-![Alurakut Logo](https://i.ibb.co/g9MxDK8/alurakut-logo.png)
 
 ## Versões
 
 * Angular: 12.1.4
 * Node: 14.15.4
-* Foundation-sites": 6.6.3
+* Foundation-sites: 6.6.3
 
 ## Iniciando o projeto 
 
